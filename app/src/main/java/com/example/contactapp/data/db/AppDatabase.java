@@ -86,6 +86,23 @@ public class AppDatabase extends SQLiteOpenHelper {
         return contacts;
     }
 
+    public boolean updateContact(int contactId, String name, String number) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NAME, name);
+        contentValues.put(PHONE_NUMBER, number);
+
+        long id = db.update(
+                TABLE_CONTACT_NAME,
+                contentValues,
+                "id = " + contactId,
+                null
+        );
+        db.close();
+        return id > -1;
+    }
+
     public boolean deleteContact(int contactId) {
         SQLiteDatabase db = this.getWritableDatabase();
 

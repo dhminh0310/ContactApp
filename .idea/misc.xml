@@ -6,6 +6,9 @@
         <entry key="..\:/VuBao/ContactApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/VuBao/ContactApp/app/src/main/res/layout/item_contact.xml" value="0.33" />
         <entry key="..\:/VuBao/ContactApp/app/src/main/res/menu/main_menu.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15104166666666666" />
+        <entry key="app/src/main/res/layout/dialog_add_contact.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/item_contact.xml" value="0.15104166666666666" />
       </map>
     </option>
   </component>
