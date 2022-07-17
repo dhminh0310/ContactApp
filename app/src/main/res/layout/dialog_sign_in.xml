@@ -15,59 +15,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="#fff">
 
-        <EditText
-            android:id="@+id/edtName"
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:hint="name..."
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:maxLines="1"
-            android:ellipsize="end"
-            />
-
-        <EditText
-            android:id="@+id/edtPhoneNumber"
+        <TextView
+            android:id="@+id/tvMessage"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/edtName"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:hint="number..."
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:inputType="phone"
-            android:layout_marginTop="5dp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            />
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:maxLines="3"
+            android:text="Please sign in to your Google Drive"/>
 
         <TextView
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnCancelSignIn"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Cancel"
-            app:layout_constraintTop_toBottomOf="@id/edtPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@id/tvMessage"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:layout_marginTop="5dp"
             android:textSize="20sp"
             android:textColor="@android:color/holo_red_light"/>
 
-        <TextView
-            android:id="@+id/btnAdd"
-            android:layout_width="100dp"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Add"
-            app:layout_constraintTop_toBottomOf="@id/edtPhoneNumber"
-            app:layout_constraintEnd_toStartOf="@id/btnCancel"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:textSize="20sp"
-            android:textColor="#0000FF"/>
+            app:layout_constraintTop_toBottomOf="@id/tvMessage"
+            app:layout_constraintEnd_toStartOf="@id/btnCancelSignIn"
+            android:layout_marginTop="5dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
