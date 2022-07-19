@@ -50,7 +50,7 @@ public class DriveServiceHelper {
         do {
             result = mDriveService.files().list()
 /*.setQ("mimeType='image/png' or mimeType='text/plain'")This si to list both image and text files. Mind the type of image(png or jpeg).setQ("mimeType='image/png' or mimeType='text/plain'") */
-                    .setQ("mimeType='text/plain'") //only get file txt
+                    .setQ("mimeType='application/json'") //only get file txt
                     .setSpaces("drive")
                     .setFields("nextPageToken, files(id, name)")
                     .setPageToken(pageToken)

@@ -51,6 +51,18 @@ public class RecyclerViewContactAdapter extends RecyclerView.Adapter<RecyclerVie
                 callback.onClickContactItem(currentContact);
             }
         });
+
+        holder.btnSms.setOnClickListener(view -> {
+            if(callback != null){
+                callback.onClickSms(currentContact);
+            }
+        });
+
+        holder.btnCall.setOnClickListener(view -> {
+            if(callback != null){
+                callback.onClickCall(currentContact);
+            }
+        });
     }
 
     @Override
@@ -70,6 +82,8 @@ public class RecyclerViewContactAdapter extends RecyclerView.Adapter<RecyclerVie
         TextView tvNumber;
         ImageButton btnEdit;
         ImageButton btnDelete;
+        ImageButton btnSms;
+        ImageButton btnCall;
 
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +92,8 @@ public class RecyclerViewContactAdapter extends RecyclerView.Adapter<RecyclerVie
             tvNumber = itemView.findViewById(R.id.tvPhoneNumber);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnSms = itemView.findViewById(R.id.btnSms);
+            btnCall = itemView.findViewById(R.id.btnCallPhone);
         }
     }
 
@@ -85,6 +101,8 @@ public class RecyclerViewContactAdapter extends RecyclerView.Adapter<RecyclerVie
         void onClickContactItem(Contact contact);
         void onEditContact(Contact contact);
         void onDeleteContact(Contact contact);
+        void onClickSms(Contact contact);
+        void onClickCall(Contact contact);
     }
 
     public void setCallback(IAdapterCallback callback) {

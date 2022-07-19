@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -45,8 +45,6 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
@@ -378,8 +376,8 @@ public class MainActivity extends AppCompatActivity implements
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyy-hh-mm-ss");
         String dateNow = simpleDateFormat.format(new Date());
 
-        if (actionType == ActionType.EXPORT) return "Contact-" + dateNow + ".txt";
-        if (actionType == ActionType.IMPORT) return "Download-" + dateNow + ".txt";
+        if (actionType == ActionType.EXPORT) return "Contact-" + dateNow + ".json";
+        if (actionType == ActionType.IMPORT) return "Download-" + dateNow + ".json";
         return "empty";
     }
 
@@ -460,12 +458,27 @@ public class MainActivity extends AppCompatActivity implements
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.red));
     }
 
+    @Override
+    public void onClickSms(Contact contact) {
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+        smsIntent.setData(Uri.parse("sms:"));
+        smsIntent.putExtra("address", contact.getPhoneNumber());
+        smsIntent.putExtra("sms_body","Hello " + contact.getName() + ", this message is sent from Contact app");
+        startActivity(smsIntent);
+    }
+
+    @Override
+    public void onClickCall(Contact contact) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact.getPhoneNumber()));
+        startActivity(intent);
+    }
+
     private static final String TAG = "GoogleDrive";
 
     private void uploadContact(File file) {
 
         try {
-            driveServiceHelper.uploadFile(file, "text/plain", null)
+            driveServiceHelper.uploadFile(file, "application/json", null)
                     .addOnSuccessListener(googleDriveFileHolder -> {
                         hideLoadingView();
                         Toast.makeText(MainActivity.this, "Upload contacts successfully", Toast.LENGTH_SHORT).show();
